@@ -152,8 +152,6 @@ Query params (opcionales):
 
 - `description`
 - `category`
-- `minAmount`
-- `maxAmount`
 - `page`
 - `limit`
 
