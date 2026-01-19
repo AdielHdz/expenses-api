@@ -4,6 +4,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
+  console.log('DATABASE_URL:', process.env.DATABASE_URL); // <<-- aquí
+  console.log('ENVIRONMENT:', process.env.ENVIRONMENT);
+
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: process.env.CLIENT_ORIGIN,
