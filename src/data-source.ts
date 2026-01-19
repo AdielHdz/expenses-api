@@ -1,8 +1,13 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
-const options = {
+type SeederDataSourceOptions = {
+  seeds: string[];
+  factories?: string[];
+};
+
+const options: DataSourceOptions & SeederDataSourceOptions = {
   type: 'postgres',
   host: process.env.PGHOST, // host de Railway
   port: +process.env.PGPORT, // puerto de Railway
