@@ -1,25 +1,22 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 
-type SeederDataSourceOptions = {
-  seeds: string[];
-  factories?: string[];
-};
-
-const options: DataSourceOptions & SeederDataSourceOptions = {
-  type: 'postgres',
-  host: process.env.PGHOST, // host de Railway
-  port: +process.env.PGPORT, // puerto de Railway
-  username: process.env.PGUSER, // usuario de Railway
-  password: process.env.PGPASSWORD, // contraseña de Railway
-  database: process.env.PGDATABASE, // nombre de la DB de Railway
-
+// DataSource para TypeORM (migraciones y NestJS)
+export const AppDataSource = new DataSource({
+  type: 'postgres', // literal 'postgres'
+  host: process.env.PGHOST,
+  port: +process.env.PGPORT,
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/database/migrations/*.ts'],
-  synchronize: false,
+  synchronize: false, // nunca true en producción
+});
+
+// Configuración de seeders (solo para typeorm-extension)
+export const SeederConfig = {
   seeds: ['src/database/seeds/**/*{.ts,.js}'],
   factories: ['src/database/factories/**/*{.ts,.js}'],
 };
-
-export const AppDataSource = new DataSource(options);
