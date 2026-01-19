@@ -2,6 +2,8 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
+console.log(process.env);
+
 export const AppDataSource = new DataSource({
   type: 'postgres', // literal
   url: process.env.DB_URL,
